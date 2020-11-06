@@ -15,6 +15,8 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
     var locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var locnameText: UITextField!
+    @IBOutlet weak var favnoteText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -36,8 +38,8 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = pointCoordinate
-            annotation.title = "New Annotation"
-            annotation.subtitle = "Map_Example"
+            annotation.title = locnameText.text
+            annotation.subtitle = favnoteText.text
             self.mapView.addAnnotation(annotation)
         }
       

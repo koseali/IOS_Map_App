@@ -17,26 +17,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UQX-J6-YIe">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UQX-J6-YIe">
+                                <rect key="frame" x="0.0" y="75" width="414" height="436"/>
                             </mapView>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FUs-bx-PfM">
+                                <rect key="frame" x="124" y="571" width="177" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Favorite Note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UNs-cZ-nxc">
+                                <rect key="frame" x="127" y="638" width="174" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UNs-cZ-nxc" secondAttribute="trailing" constant="113" id="108-QC-GYi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UQX-J6-YIe" secondAttribute="bottom" id="9Hm-U7-7h9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UNs-cZ-nxc" secondAttribute="bottom" constant="190" id="Kzz-hp-Guq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UQX-J6-YIe" secondAttribute="trailing" id="TcW-CG-T0e"/>
                             <constraint firstItem="UQX-J6-YIe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Vwp-3m-22U"/>
                             <constraint firstItem="UQX-J6-YIe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Y5x-VZ-yI2"/>
+                            <constraint firstItem="UNs-cZ-nxc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="127" id="lW4-zI-5tv"/>
+                            <constraint firstItem="UNs-cZ-nxc" firstAttribute="trailing" secondItem="FUs-bx-PfM" secondAttribute="trailing" id="pne-IO-BCz"/>
+                            <constraint firstItem="UNs-cZ-nxc" firstAttribute="top" secondItem="FUs-bx-PfM" secondAttribute="bottom" constant="33" id="wWU-Un-FxW"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="favnoteText" destination="UNs-cZ-nxc" id="yrN-Mm-bI2"/>
+                        <outlet property="locnameText" destination="FUs-bx-PfM" id="aAg-rS-PKc"/>
                         <outlet property="mapView" destination="UQX-J6-YIe" id="AGc-9q-BaZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="67"/>
+            <point key="canvasLocation" x="137.68115942028987" y="66.964285714285708"/>
         </scene>
     </scenes>
     <resources>
