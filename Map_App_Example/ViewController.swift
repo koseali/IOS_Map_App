@@ -23,13 +23,30 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        
-        
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(selectLocation(gestureRecognizer:)))
+        gestureRecognizer.minimumPressDuration = 3
+        mapView.addGestureRecognizer(gestureRecognizer)
     }
+    
+    
+    @objc func selectLocation(gestureRecognizer : UILongPressGestureRecognizer){ // we need to use gesture methods
+        if gestureRecognizer.state == .began {
+            let point = gestureRecognizer.location(in: self.mapView)
+            let pointCoordinate = self.mapView.convert(point, toCoordinateFrom: self.mapView)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = pointCoordinate
+            annotation.title = "New Annotation"
+            annotation.subtitle = "Map_Example"
+            self.mapView.addAnnotation(annotation)
+        }
+      
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
       
         let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let span = MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
     }
