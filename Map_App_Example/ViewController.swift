@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import MapKit
+class ViewController: UIViewController , MKMapViewDelegate{
 
-class ViewController: UIViewController {
-
+    // First Step: import mapkit library and delegate MKMapViewDelegate  write didload mapview.delegate and you will see to map on your app view
+    
+    @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        mapView.delegate = self
     }
 
 
