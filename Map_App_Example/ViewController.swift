@@ -8,11 +8,14 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
 
 class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDelegate{
 
     // First Step: import mapkit library and delegate MKMapViewDelegate  write didload mapview.delegate and you will see to map on your app view
     var locationManager = CLLocationManager()
+    var choosenLatitude = Double()
+    var choosenLongitude = Double()
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locnameText: UITextField!
@@ -35,7 +38,8 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         if gestureRecognizer.state == .began {
             let point = gestureRecognizer.location(in: self.mapView)
             let pointCoordinate = self.mapView.convert(point, toCoordinateFrom: self.mapView)
-            
+            choosenLongitude = pointCoordinate.longitude
+            choosenLatitude = pointCoordinate.latitude
             let annotation = MKPointAnnotation()
             annotation.coordinate = pointCoordinate
             annotation.title = locnameText.text
@@ -53,6 +57,25 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         mapView.setRegion(region, animated: true)
     }
 
-
+    @IBAction func saveButton(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let newPlace = NSEntityDescription.insertNewObject(forEntityName: "Places", into: context)
+        
+        newPlace.setValue(locnameText.text, forKey: "title")
+        newPlace.setValue(favnoteText.text, forKey: "subtitle")
+        newPlace.setValue(choosenLatitude, forKey: "latitude")
+        newPlace.setValue(choosenLongitude, forKey: "longitude")
+        newPlace.setValue(UUID(), forKey: "id")
+        do {
+            try context.save()
+            print("KAydetti")
+        } catch   {
+            print("Hata")
+        }
+        
+    }
+    
 }
 
