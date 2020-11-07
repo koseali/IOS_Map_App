@@ -21,6 +21,8 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
     var selectPlace = ""
     var selectid : UUID?
     
+    
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locnameText: UITextField!
     @IBOutlet weak var favnoteText: UITextField!
@@ -37,10 +39,46 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         mapView.addGestureRecognizer(gestureRecognizer)
         
         if selectPlace != "" {
-            let stringUUID = selectid?.uuidString
-            print("get data id")
-            print(stringUUID!)
-          
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Places")
+            request.returnsObjectsAsFaults = false
+            let idString = selectid!.uuidString
+            request.predicate = NSPredicate(format: "id = %@", idString)
+            do {
+                let results = try context.fetch(request)
+                if results.count > 0 {
+                    for result in results as! [NSManagedObject] {
+                        
+                        if let title = result.value(forKey: "title") as? String{
+                            locnameText.text = title
+                            
+                            if let subtitle = result.value(forKey: "subtitle") as? String{
+                                favnoteText.text = subtitle
+                                
+                                if let latitude = result.value(forKey: "latitude") as? Double{
+                                    choosenLatitude = latitude
+                                    
+                                    if let longitude  = result.value(forKey: "longitude") as? Double{
+                                        choosenLongitude = longitude
+                                        
+                                        let annotation = MKPointAnnotation()
+                                        let coordinate = CLLocationCoordinate2D(latitude: choosenLatitude, longitude: choosenLongitude)
+                                        annotation.title = title
+                                        annotation.subtitle = subtitle
+                                        annotation.coordinate = coordinate
+                                        mapView.addAnnotation(annotation)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }catch  {
+                print("Error read to loc.")
+            }
+            
+           
         }
         
     }
