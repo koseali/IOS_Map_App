@@ -70,9 +70,9 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         newPlace.setValue(UUID(), forKey: "id")
         do {
             try context.save()
-            print("KAydetti")
+            print("Save Success")
         } catch   {
-            print("Hata")
+            print("Saving Error")
         }
         
     }
