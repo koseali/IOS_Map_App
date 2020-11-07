@@ -14,6 +14,7 @@
 		952AF6D6255591560074DF88 /* Map_App_Example.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 952AF6D4255591560074DF88 /* Map_App_Example.xcdatamodeld */; };
 		952AF6D8255591590074DF88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 952AF6D7255591590074DF88 /* Assets.xcassets */; };
 		952AF6DB255591590074DF88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 952AF6D9255591590074DF88 /* LaunchScreen.storyboard */; };
+		95BEE8EB25569516001F89C1 /* tableMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BEE8EA25569516001F89C1 /* tableMainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		952AF6D7255591590074DF88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		952AF6DA255591590074DF88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		952AF6DC255591590074DF88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95BEE8EA25569516001F89C1 /* tableMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableMainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				952AF6CB255591560074DF88 /* AppDelegate.swift */,
 				952AF6CD255591560074DF88 /* SceneDelegate.swift */,
 				952AF6CF255591560074DF88 /* ViewController.swift */,
+				95BEE8EA25569516001F89C1 /* tableMainView.swift */,
 				952AF6D1255591560074DF88 /* Main.storyboard */,
 				952AF6D7255591590074DF88 /* Assets.xcassets */,
 				952AF6D9255591590074DF88 /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 				952AF6D0255591560074DF88 /* ViewController.swift in Sources */,
 				952AF6D6255591560074DF88 /* Map_App_Example.xcdatamodeld in Sources */,
 				952AF6CC255591560074DF88 /* AppDelegate.swift in Sources */,
+				95BEE8EB25569516001F89C1 /* tableMainView.swift in Sources */,
 				952AF6CE255591560074DF88 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
