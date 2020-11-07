@@ -13,6 +13,10 @@ class tableMainView: UIViewController, UITableViewDelegate,UITableViewDataSource
     
     var titleArray = [String]()
     var idArray = [UUID]()
+    
+    var choosenPlace = ""
+    var choosenid : UUID?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +29,7 @@ class tableMainView: UIViewController, UITableViewDelegate,UITableViewDataSource
         getData() 
     }
     @objc func addButton(){
+        choosenPlace = ""
         performSegue(withIdentifier: "toViewController", sender: nil)}
     
     
@@ -66,7 +71,20 @@ class tableMainView: UIViewController, UITableViewDelegate,UITableViewDataSource
         
         
     }
-
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        choosenPlace = titleArray[indexPath.row]
+        choosenid = idArray[indexPath.row]
+        performSegue(withIdentifier: "toViewController", sender: nil)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toViewController" {
+            let  destinationVC  = segue.destination as! ViewController
+            destinationVC.selectPlace = choosenPlace
+            destinationVC.selectid = choosenid
+            
+            
+        }
+    }
     
 }

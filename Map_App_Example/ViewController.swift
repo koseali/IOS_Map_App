@@ -17,6 +17,10 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
     var choosenLatitude = Double()
     var choosenLongitude = Double()
     
+    
+    var selectPlace = ""
+    var selectid : UUID?
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locnameText: UITextField!
     @IBOutlet weak var favnoteText: UITextField!
@@ -31,6 +35,14 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(selectLocation(gestureRecognizer:)))
         gestureRecognizer.minimumPressDuration = 3
         mapView.addGestureRecognizer(gestureRecognizer)
+        
+        if selectPlace != "" {
+            let stringUUID = selectid?.uuidString
+            print("get data id")
+            print(stringUUID!)
+          
+        }
+        
     }
     
     
@@ -74,8 +86,8 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         } catch   {
             print("Saving Error")
         }
-        
     }
+    
     
 }
 
