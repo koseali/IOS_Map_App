@@ -139,6 +139,32 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         
         return pinView
     }
+    
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if selectPlace != ""{
+            let newLocation = CLLocation(latitude: choosenLatitude, longitude: choosenLongitude)
+            CLGeocoder().reverseGeocodeLocation(newLocation) { (placeMark, error) in
+                // closure Call back function
+                // Navigation need to mapItem. Mapitem need to PlaceMark object.
+                // PlaceMark take it to reverseGeoCode method
+                if let placemark = placeMark {
+                    if placemark.count > 0 {
+                        let newPlacemark = MKPlacemark(placemark: placemark[0])
+                        let item = MKMapItem(placemark: newPlacemark)
+                        let annotationTitle = self.locnameText.text
+                        item.name = annotationTitle
+                        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+                        item.openInMaps(launchOptions: launchOptions)
+                        
+                    }
+                }
+                
+            }
+            
+        }
+    }
+    
 
     @IBAction func saveButton(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
