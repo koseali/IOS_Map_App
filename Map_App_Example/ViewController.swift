@@ -68,6 +68,12 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
                                         annotation.subtitle = subtitle
                                         annotation.coordinate = coordinate
                                         mapView.addAnnotation(annotation)
+                                        
+                                        locationManager.stopUpdatingLocation()
+                                        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                                        let region = MKCoordinateRegion(center: coordinate, span: span)
+                                        mapView.setRegion(region, animated: true)
+                                        
                                     }
                                 }
                             }
@@ -100,11 +106,38 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if selectPlace == "" {
+            let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
+            let span = MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025)
+            let region = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
+        }else{
+            //do nothing
+            }
       
-        let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025)
-        let region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation{
+            return nil
+        }
+        
+        let reuseId = "myAnnotation"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            pinView?.tintColor = UIColor.black // rengini pinview özelleştirme
+            let button = UIButton(type: UIButton.ButtonType.detailDisclosure)
+            pinView?.rightCalloutAccessoryView = button
+            
+        }else{
+            pinView?.annotation = annotation
+        }
+        
+        
+        return pinView
     }
 
     @IBAction func saveButton(_ sender: Any) {
@@ -124,6 +157,8 @@ class ViewController: UIViewController , MKMapViewDelegate,CLLocationManagerDele
         } catch   {
             print("Saving Error")
         }
+        NotificationCenter.default.post(name: NSNotification.Name("newPlace"), object: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     

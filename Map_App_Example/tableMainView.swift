@@ -28,6 +28,10 @@ class tableMainView: UIViewController, UITableViewDelegate,UITableViewDataSource
         
         getData() 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name("newPlace"), object: nil)
+    }
     @objc func addButton(){
         choosenPlace = ""
         performSegue(withIdentifier: "toViewController", sender: nil)}
@@ -42,7 +46,7 @@ class tableMainView: UIViewController, UITableViewDelegate,UITableViewDataSource
         return cell
     }
     
-    func getData() {
+    @objc func getData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
